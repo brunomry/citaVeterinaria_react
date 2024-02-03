@@ -7,7 +7,7 @@ const FormularioVeterinaria = () => {
         <h4 className="mb-4 ms-5">Llenar el formulario para crear una cita</h4>
         <div className="mb-3 containerInputs py-5 px-3 px-sm-5">
           <Form.Group className="mb-3 d-flex flex-column justify-content-start flex-lg-row justify-content-lg-between align-items-lg-center">
-            <Form.Label className="lead fw-medium">
+            <Form.Label >
               Nombre de Mascota:
             </Form.Label>
             <Form.Control
@@ -20,7 +20,7 @@ const FormularioVeterinaria = () => {
             />
           </Form.Group>
           <Form.Group className="mb-3 d-flex flex-column justify-content-start flex-lg-row justify-content-lg-between align-items-lg-center">
-            <Form.Label className="lead fw-medium">Nombre de Dueño:</Form.Label>
+            <Form.Label >Nombre de Dueño:</Form.Label>
             <Form.Control
               type="text"
               placeholder="nombre de dueño"
@@ -32,7 +32,7 @@ const FormularioVeterinaria = () => {
           </Form.Group>
           <div className="d-flex flex-column flex-sm-row gap-2 gap-sm-3 justify-content-between mb-3">
             <Form.Group className="groupDate d-flex flex-column justify-content-start flex-lg-row gap-lg-4 justify-content-lg-between align-items-lg-center">
-              <Form.Label className="lead fw-medium">Fecha:</Form.Label>
+              <Form.Label >Fecha:</Form.Label>
               <Form.Control
                 type="date"
                 className="py-sm-3 inputDate"
@@ -42,7 +42,7 @@ const FormularioVeterinaria = () => {
               />
             </Form.Group>
             <Form.Group className="d-flex flex-column gap-lg-4 justify-content-start flex-lg-row justify-content-lg-center align-items-lg-center">
-              <Form.Label className="lead fw-medium">Hora:</Form.Label>
+              <Form.Label >Hora:</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="hh:mm"
@@ -54,7 +54,7 @@ const FormularioVeterinaria = () => {
             </Form.Group>
           </div>
           <Form.Group className="mb-3 d-flex flex-column justify-content-start flex-lg-row justify-content-lg-between align-items-lg-center">
-            <Form.Label className="lead fw-medium">Síntomas:</Form.Label>
+            <Form.Label >Síntomas:</Form.Label>
             <Form.Control
               type="text"
               placeholder="describir síntomas"
