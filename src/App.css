@@ -1,0 +1,10 @@
+#root{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #a4542b;
+}
+
+#root .mainPage{
+  flex-grow: 1;
+}
