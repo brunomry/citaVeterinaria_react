@@ -4,6 +4,7 @@ import TituloPrincipal from "./components/TituloPrincipal";
 import Footer from "./components/Footer";
 import "./App.css";
 import TituloVeterinaria from "./components/TituloVeterinaria";
+import FormularioVeterinaria from "./components/FormularioVeterinaria";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Container className="my-2 mainPage">
         <TituloPrincipal></TituloPrincipal>
         <TituloVeterinaria/>
+        <FormularioVeterinaria/>
       </Container>
       <Footer />
     </>
