@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import ListadoCitas from "./ListadoCitas";
+import {
+  validarNombre,
+  validarSintomas,
+} from "./js/validaciones.js";
+import Swal from "sweetalert2";
 
 const FormularioVeterinaria = () => {
   const [nombreMascota, setNombreMascota] = useState("");
@@ -8,36 +13,79 @@ const FormularioVeterinaria = () => {
   const [fecha, setFecha] = useState("");
   const [hora, setHora] = useState("");
   const [sintomas, setSintomas] = useState("");
-  const pacientesLocalStorage = JSON.parse(localStorage.getItem("pacientesKey")) || [];
-  const [pacientes, setPacientes] = useState(pacientesLocalStorage);
+  const citasLocalStorage =
+    JSON.parse(localStorage.getItem("citasKey")) || [];
+  const [citas, setCitas] = useState(citasLocalStorage);
 
   useEffect(() => {
-    localStorage.setItem("pacientesKey", JSON.stringify(pacientes));
-  }, [pacientes]);
+    localStorage.setItem("citasKey", JSON.stringify(citas));
+  }, [citas]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const nuevoPaciente = {
-      nombreMascota: nombreMascota,
-      nombreDuenio: nombreDuenio,
-      fecha: fecha,
-      hora: hora,
-      sintomas: sintomas
-    };
+    if (
+      validarNombre(nombreMascota) &&
+      validarNombre(nombreDuenio) &&
+      validarSintomas(sintomas)
+    ) {
+      const nuevaCita = {
+        nombreMascota: nombreMascota,
+        nombreDuenio: nombreDuenio,
+        fecha: fecha,
+        hora: hora,
+        sintomas: sintomas,
+      };
 
-    setPacientes([...pacientes, nuevoPaciente]);
+      setCitas([...citas, nuevaCita]);
 
-    setFecha("");
-    setHora("");
-    setNombreDuenio("");
-    setNombreMascota("");
-    setSintomas("");
+      Swal.fire({
+        icon: "success",
+        title: "La cita fue registrada con éxito",
+        showConfirmButton: true,
+      });
+
+      setFecha("");
+      setHora("");
+      setNombreDuenio("");
+      setNombreMascota("");
+      setSintomas("");
+    } else {
+      Swal.fire({
+        title: "Uno o más datos no válidos",
+        text: "Por favor, asegúrese de ingresar datos válidos!",
+        icon: "warning",
+        confirmButtonColor: "#d64130",
+        confirmButtonText: "Ok!",
+      });
+    }
   };
 
-  const borrarPaciente = (paciente) => {
-    const pacientesFiltrados = pacientes.filter((elementoPaciente) => elementoPaciente !== paciente);
-    setPacientes(pacientesFiltrados);
+  const borrarCita = (cita) => {
+    Swal.fire({
+      title: "¿Estas seguro de eliminar la cita?",
+      text: "Una vez borrada la cita no puede volver atrás",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const citasFiltradas = citas.filter(
+          (elementoCita) => elementoCita !== cita
+        );
+        setCitas(citasFiltradas);
+
+        Swal.fire({
+          title: "Cita eliminada con éxito",
+          text: "La cita fue eliminada con éxito",
+          icon: "success",
+        });
+      }
+    });
+
   };
 
   return (
@@ -74,7 +122,7 @@ const FormularioVeterinaria = () => {
                 value={nombreDuenio}
               />
             </Form.Group>
-            <div className="d-flex flex-column flex-sm-row gap-2 gap-sm-3 justify-content-between mb-3">
+            <div className="d-flex flex-column flex-sm-row gap-2 gap-sm-3 justify-content-lg-between mb-3">
               <Form.Group className="groupDate d-flex flex-column justify-content-start flex-lg-row gap-lg-4 justify-content-lg-between align-items-lg-center">
                 <Form.Label>Fecha:</Form.Label>
                 <Form.Control
@@ -89,8 +137,7 @@ const FormularioVeterinaria = () => {
               <Form.Group className="d-flex flex-column gap-lg-4 justify-content-start flex-lg-row justify-content-lg-center align-items-lg-center">
                 <Form.Label>Hora:</Form.Label>
                 <Form.Control
-                  type="text"
-                  placeholder="hh:mm"
+                  type="time"
                   className="py-sm-3"
                   minLength={3}
                   maxLength={265}
@@ -107,7 +154,7 @@ const FormularioVeterinaria = () => {
                 placeholder="describir síntomas"
                 className="py-sm-3 input"
                 minLength={3}
-                maxLength={50}
+                maxLength={100}
                 required
                 onChange={(e) => setSintomas(e.target.value)}
                 value={sintomas}
@@ -124,7 +171,7 @@ const FormularioVeterinaria = () => {
           </div>
         </Form>
       </section>
-      <ListadoCitas pacientes={pacientes} borrarPaciente={borrarPaciente} />
+      <ListadoCitas citas={citas} borrarCita={borrarCita} />
     </>
   );
 };

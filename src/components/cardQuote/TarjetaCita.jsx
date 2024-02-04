@@ -3,22 +3,22 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import EncabezadoTarjetaCita from "./EncabezadoTarjetaCita";
 import FormularioTarjetaCita from "./FormularioTarjetaCita";
 
-const TarjetaCita = ({ paciente, borrarPaciente }) => {
+const TarjetaCita = ({ cita, borrarCita }) => {
   return (
     <Card className="cardQuote pb-3">
       <EncabezadoTarjetaCita
-        nombreMascota={paciente["nombreMascota"]}
-        nombreDuenio={paciente["nombreDuenio"]}
+        nombreMascota={cita["nombreMascota"]}
+        nombreDuenio={cita["nombreDuenio"]}
       />
       <FormularioTarjetaCita
-        fecha={paciente["fecha"]}
-        hora={paciente["hora"]}
-        sintomas={paciente["sintomas"]}
+        fecha={cita["fecha"]}
+        hora={cita["hora"]}
+        sintomas={cita["sintomas"]}
       />
       <Button
         className="btnBorrar border-0 px-5 py-3 mx-auto"
         onClick={() =>
-          borrarPaciente(paciente)
+          borrarCita(cita)
         }
       >
         Borrar
