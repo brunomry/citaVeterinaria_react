@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import "./App.css";
 import TituloVeterinaria from "./components/TituloVeterinaria";
 import FormularioVeterinaria from "./components/FormularioVeterinaria";
-import ListadoCitas from "./components/ListadoCitas";
 
 function App() {
   return (
@@ -14,7 +13,6 @@ function App() {
         <TituloPrincipal></TituloPrincipal>
         <TituloVeterinaria/>
         <FormularioVeterinaria/>
-        <ListadoCitas/>
       </Container>
       <Footer />
     </>
