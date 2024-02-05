@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import ListadoCitas from "./ListadoCitas";
-import {
-  validarNombre,
-  validarSintomas,
-} from "./js/validaciones.js";
+import { validarNombre, validarSintomas } from "./js/validaciones.js";
 import Swal from "sweetalert2";
 
 const FormularioVeterinaria = () => {
+  const [titulo, setTitulo] = useState("No hay citas");
   const [nombreMascota, setNombreMascota] = useState("");
   const [nombreDuenio, setNombreDuenio] = useState("");
   const [fecha, setFecha] = useState("");
   const [hora, setHora] = useState("");
   const [sintomas, setSintomas] = useState("");
-  const citasLocalStorage =
-    JSON.parse(localStorage.getItem("citasKey")) || [];
+  const citasLocalStorage = JSON.parse(localStorage.getItem("citasKey")) || [];
   const [citas, setCitas] = useState(citasLocalStorage);
 
   useEffect(() => {
     localStorage.setItem("citasKey", JSON.stringify(citas));
+    if (citas.length !== 0) {
+      setTitulo("Administra las citas aquí");
+    }else{
+      setTitulo("No hay citas");
+    }
   }, [citas]);
 
   const handleSubmit = (e) => {
@@ -85,7 +87,6 @@ const FormularioVeterinaria = () => {
         });
       }
     });
-
   };
 
   return (
@@ -171,7 +172,7 @@ const FormularioVeterinaria = () => {
           </div>
         </Form>
       </section>
-      <ListadoCitas citas={citas} borrarCita={borrarCita} />
+      <ListadoCitas citas={citas} borrarCita={borrarCita} titulo={titulo} />
     </>
   );
 };
