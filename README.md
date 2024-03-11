@@ -26,11 +26,11 @@ La aplicación está desplegada en Netlify. Puedes acceder a ella haciendo clic 
 
 1. Clona este repositorio en tu máquina local a través de una terminal:
 
-  git clone <[url-del-repositorio](https://github.com/brunomry/ejercicio9_tp_react.git)>
+  git clone <[url-del-repositorio](https://github.com/brunomry/citaVeterinaria_react.git)>
 
 2. Navega al directorio del proyecto:
 
-  cd ejercicio9_tp_react
+  cd citaVeterinaria_react
 
 3. Instala las dependencias del proyecto:
 
